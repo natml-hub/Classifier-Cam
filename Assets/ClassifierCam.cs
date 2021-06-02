@@ -7,7 +7,6 @@ namespace NatSuite.Examples {
 
     using UnityEngine;
     using UnityEngine.UI;
-    using System.Threading.Tasks;
     using NatSuite.Devices;
     using NatSuite.ML;
     using NatSuite.ML.Features;
