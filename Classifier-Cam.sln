@@ -1,23 +1,27 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{f3f580e2-1d7a-521c-a8fd-fbcc3c82616d}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NatSuite.ML", "NatSuite.ML.csproj", "{7933c13f-c9dd-ffbf-2cf1-af3d0d4cdc59}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NatSuite.Devices", "NatSuite.Devices.csproj", "{1939b41e-92d1-4406-2860-a6f4cf3e7c71}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{f3f580e2-1d7a-521c-a8fd-fbcc3c82616d}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NatSuite.ML.Editor", "NatSuite.ML.Editor.csproj", "{59d16054-000e-4a68-495b-a5617bc34638}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{f3f580e2-1d7a-521c-a8fd-fbcc3c82616d}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{f3f580e2-1d7a-521c-a8fd-fbcc3c82616d}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7933c13f-c9dd-ffbf-2cf1-af3d0d4cdc59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7933c13f-c9dd-ffbf-2cf1-af3d0d4cdc59}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1939b41e-92d1-4406-2860-a6f4cf3e7c71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1939b41e-92d1-4406-2860-a6f4cf3e7c71}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{f3f580e2-1d7a-521c-a8fd-fbcc3c82616d}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{f3f580e2-1d7a-521c-a8fd-fbcc3c82616d}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59d16054-000e-4a68-495b-a5617bc34638}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59d16054-000e-4a68-495b-a5617bc34638}.Debug|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
