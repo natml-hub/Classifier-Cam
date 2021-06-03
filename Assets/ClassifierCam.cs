@@ -42,6 +42,7 @@ namespace NatSuite.Examples {
             rawImage.texture = previewTexture;
             aspectFitter.aspectRatio = (float)previewTexture.width / previewTexture.height;
             // Fetch MobileNet classifier
+            Debug.Log("Fetching model from NatML Hub");
             modelData = await MLModelData.FromHub("@natsuite/mobilenet-v2");
             model = modelData.Deserialize();
             predictor = new MLClassificationPredictor(model, modelData.labels);
