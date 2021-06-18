@@ -2,15 +2,13 @@
 
 ![classifier](.media/classifier.gif)
 
-This is an example project which integrates the NatML deep learning API with the NatDevice media device API for realtime object classification. The project currently includes the following models:
-- [MobileNet v2](https://github.com/onnx/models/tree/master/vision/classification/mobilenet)
-- [ShuffleNet v2](https://github.com/onnx/models/tree/master/vision/classification/shufflenet)
-- [SqueezeNet 1.1](https://github.com/onnx/models/tree/master/vision/classification/squeezenet)
+Realtime object classification in Unity Engine with NatML. This project uses the [@natsuite/mobilenet-v2](https://hub.natsuite.io/model/natsuite/mobilenet-v2) package from NatML Hub.
 
 ## Requirements
 - Unity 2019.2+
 - NatML 1.0+
-- NatDevice 1.1+
+- [@natsuite/mobilenet-v2](https://hub.natsuite.io/model/natsuite/mobilenet-v2)
+- [NatDevice 1.1+](https://assetstore.unity.com/packages/tools/integration/natdevice-media-device-api-162053)
 
 ## Supported Platforms
 - Android API level 24+
