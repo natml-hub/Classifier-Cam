@@ -2,7 +2,7 @@
 
 ![classifier](.media/classifier.gif)
 
-Realtime object classification in Unity Engine with NatML. This project uses the [@natsuite/mobilenet-v2](https://hub.natsuite.io/model/natsuite/mobilenet-v2) package from NatML Hub.
+Realtime object classification in Unity Engine with NatML. This project uses the [@natsuite/mobilenet-v2](https://hub.natsuite.io/predictor/@natsuite/mobilenet-v2) package from NatML Hub.
 
 ## Requirements
 - Unity 2019.2+
