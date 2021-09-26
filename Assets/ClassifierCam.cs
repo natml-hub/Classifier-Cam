@@ -13,7 +13,10 @@ namespace NatSuite.Examples {
     using NatSuite.ML.Vision;
 
     public class ClassifierCam : MonoBehaviour {
-        
+            
+        [Header(@"NatML Hub")]
+        public string accessKey;
+
         [Header(@"UI")]
         public RawImage rawImage;
         public AspectRatioFitter aspectFitter;
@@ -24,7 +27,7 @@ namespace NatSuite.Examples {
         Texture2D previewTexture;
         MLModelData modelData;
         MLModel model;
-        MLClassificationPredictor predictor;
+        MobileNetv2Predictor predictor;
         
         async void Start () {
             // Request camera permissions
@@ -41,21 +44,24 @@ namespace NatSuite.Examples {
             // Display the camera preview
             rawImage.texture = previewTexture;
             aspectFitter.aspectRatio = (float)previewTexture.width / previewTexture.height;
-            // Fetch MobileNet classifier
+            // Fetch the model data from NatML Hub
             Debug.Log("Fetching model from NatML Hub");
-            modelData = await MLModelData.FromHub("@natsuite/mobilenet-v2");
+            modelData = await MLModelData.FromHub("@natsuite/mobilenet-v2", accessKey);
+            // Deserialize the model
             model = modelData.Deserialize();
-            predictor = new MLClassificationPredictor(model, modelData.labels);
+            // Create the MobileNet v2 predictor
+            predictor = new MobileNetv2Predictor(model, modelData.labels);
         }
 
         void Update () {
             // Check that model has been downloaded
             if (predictor == null)
                 return;
+            // Create input feature
+            var inputFeature = new MLImageFeature(previewTexture);
+            (inputFeature.mean, inputFeature.std) = modelData.normalization;
             // Classify
-            var input = new MLImageFeature(previewTexture);
-            (input.mean, input.std) = modelData.normalization;
-            var (label, confidence) = predictor.Predict(input);
+            var (label, confidence) = predictor.Predict(inputFeature);
             // Display
             labelText.text = label;
             confidenceText.text = $"{confidence:#.##}";
