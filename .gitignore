@@ -8,11 +8,13 @@ obj/
 .gradle/
 .vs/
 
-# NatSuite Framework
+# NatML
 Assets/NatSuite/
 Assets/NatSuite.meta
+Assets/NatML/
+Assets/NatML.meta
 
-# NatML Predictors
+# Predictors
 Assets/ML/
 Assets/ML.meta
 

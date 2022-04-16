@@ -1,6 +1,6 @@
 /* 
 *   Classifier Cam
-*   Copyright (c) 2021 Yusuf Olokoba.
+*   Copyright (c) 2022 NatML Inc. All Rights Reserved.
 */
 
 namespace NatSuite.Examples {
@@ -8,13 +8,14 @@ namespace NatSuite.Examples {
     using UnityEngine;
     using UnityEngine.UI;
     using NatSuite.Devices;
+    using NatSuite.Devices.Outputs;
     using NatSuite.ML;
     using NatSuite.ML.Features;
     using NatSuite.ML.Vision;
 
     public class ClassifierCam : MonoBehaviour {
             
-        [Header(@"NatML Hub")]
+        [Header(@"NatML")]
         public string accessKey;
 
         [Header(@"UI")]
@@ -24,14 +25,15 @@ namespace NatSuite.Examples {
         public Text confidenceText;
 
         CameraDevice cameraDevice;
-        Texture2D previewTexture;
+        TextureOutput textureOutput;
         MLModelData modelData;
         MLModel model;
         MobileNetv2Predictor predictor;
         
         async void Start () {
             // Request camera permissions
-            if (!await MediaDeviceQuery.RequestPermissions<CameraDevice>()) {
+            var permissionStatus = await MediaDeviceQuery.RequestPermissions<CameraDevice>();
+            if (permissionStatus != PermissionStatus.Authorized) {
                 Debug.LogError(@"User did not grant camera permissions");
                 return;
             }
@@ -39,9 +41,11 @@ namespace NatSuite.Examples {
             var query = new MediaDeviceQuery(MediaDeviceCriteria.CameraDevice);
             cameraDevice = query.current as CameraDevice;
             // Start the camera preview
+            textureOutput = new TextureOutput();
             cameraDevice.previewResolution = (1280, 720);
-            previewTexture = await cameraDevice.StartRunning();
+            cameraDevice.StartRunning(textureOutput);
             // Display the camera preview
+            var previewTexture = await textureOutput;
             rawImage.texture = previewTexture;
             aspectFitter.aspectRatio = (float)previewTexture.width / previewTexture.height;
             // Fetch the model data from NatML Hub
@@ -58,7 +62,8 @@ namespace NatSuite.Examples {
             if (predictor == null)
                 return;
             // Create input feature
-            var inputFeature = new MLImageFeature(previewTexture);
+            var previewTexture = textureOutput.texture;
+            var inputFeature = new MLImageFeature(previewTexture.GetRawTextureData<byte>(), previewTexture.width, previewTexture.height);
             (inputFeature.mean, inputFeature.std) = modelData.normalization;
             // Classify
             var (label, confidence) = predictor.Predict(inputFeature);
@@ -69,6 +74,7 @@ namespace NatSuite.Examples {
 
         void OnDestroy () {
             // Stop camera
+            textureOutput?.Dispose();
             if (cameraDevice?.running ?? false)
                 cameraDevice.StopRunning();
             // Dispose model
